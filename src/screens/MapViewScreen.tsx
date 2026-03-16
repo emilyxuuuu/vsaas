@@ -40,7 +40,17 @@ const cameraPositions: { [key: string]: { x: number; y: number; zone: string } }
 };
 
 // Zone definitions for floor plan
-const zones = [
+interface Zone {
+  id: string;
+  label: string;
+  color: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+const zones: Zone[] = [
   { id: 'entrance', label: 'Entrance', color: 'rgba(13, 148, 136, 0.1)', x: 0.35, y: 0.05, w: 0.3, h: 0.2 },
   { id: 'lobby', label: 'Lobby', color: 'rgba(139, 92, 246, 0.1)', x: 0.2, y: 0.2, w: 0.3, h: 0.25 },
   { id: 'garage', label: 'Garage', color: 'rgba(245, 158, 11, 0.1)', x: 0.0, y: 0.35, w: 0.25, h: 0.3 },
@@ -163,7 +173,7 @@ export const MapViewScreen: React.FC = () => {
     );
   };
 
-  const renderZone = (zone: typeof zones[0]) => {
+  const renderZone = (zone: Zone) => {
     const isSelected = selectedZone === zone.id;
     return (
       <TouchableOpacity
